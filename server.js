@@ -20,9 +20,10 @@ io.on("connection", (socket) => {
     async function generateQuestion(socket, subject){
         console.log(subject)
         difficulty=subject.difficulty
+        mode=subject.mode
         subject=subject.role
         
-        console.log(subject,difficulty)
+        console.log(subject,difficulty,mode)
         try{
         const chatCompletion = await client.chat.completions.create({
             model: "llama-3.3-70b-versatile",
@@ -48,17 +49,15 @@ io.on("connection", (socket) => {
                     - If subject is "anatomy":
                     - HUMAN ANATOMY (biology/medical), organs, body systems, physiology.
 
-                    
                     Rules:
                     - Ask ONE question only not more than 2 sentence.
                     - Do not repeat previous questions.
                     - Do not give answer
-                    - - If no interview history is provided, respond ONLY with: "No interview answers available for evaluation."
                     `
                 },
                 {
                     role: "user",
-                    content: `Ask a ${difficulty} ${subject} interview question.
+                    content: `Ask a ${difficulty} ${subject} interview question of type ${mode}.
                             Avoid questions from this as well as related to this: ${JSON.stringify(questions)}`
                 }
             ]
@@ -73,11 +72,12 @@ io.on("connection", (socket) => {
     }
 
     console.log("User connected ");
-    socket.on("startInterview",async (subject,difficulty)=>{
+    socket.on("startInterview",async (subject,difficulty,mode)=>{
         questions=[]
         sub=subject
         diff=difficulty
-        await generateQuestion(socket, subject, difficulty);
+        mod=mode
+        await generateQuestion(socket, subject, difficulty, mode);
     })
 
     socket.on("Answer",async (answer)=>{
@@ -115,9 +115,9 @@ io.on("connection", (socket) => {
                         - Do not add any extra text or explanation in this case.
 
                         Strengths:(be strict, mention "NONE" if it is not there or answer is irrelivant)
-                        Weaknesses:
+                        Weaknesses:(if question is of type mcq mention what type of question is weakness of the candidate)
                         Improvements:
-                        Overall rating (1-10):
+                        Overall rating (1-10):(if question is of type mcq rate out of total question answered correct/total question asked)
                     `
                 },
                 {
