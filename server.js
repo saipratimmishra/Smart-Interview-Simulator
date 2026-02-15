@@ -111,10 +111,10 @@ io.on("connection", (socket) => {
                         - Suggest improvements.
                         - DO NOT generate new questions.
                         - Keep feedback concise and clear.
+                        - If no interview history is provided, respond ONLY with: "No interview answers available for evaluation."
+                        - Do not add any extra text or explanation in this case.
 
-                        Output format:
-
-                        Strengths:(be strict dont mention if it is not there or answer is irrelivant)
+                        Strengths:(be strict, mention "NONE" if it is not there or answer is irrelivant)
                         Weaknesses:
                         Improvements:
                         Overall rating (1-10):
