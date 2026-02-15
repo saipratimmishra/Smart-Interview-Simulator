@@ -12,7 +12,7 @@ let quesanswer=undefined;
 let sub;
 let diff;
 const client = new Groq({
-   apiKey: "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"
+   apiKey: process.env.GROQ_API_KEY
 });
 app.use(express.static("public"));
 
