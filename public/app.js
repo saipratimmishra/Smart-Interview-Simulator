@@ -13,6 +13,8 @@ const answerInput = document.getElementById("answerInput");
 const aiThinking = document.getElementById("aiThinking");
 const feedback_main=document.getElementById("feedback-main");
 const main=document.getElementById("main");
+let mode;
+
 document.getElementById("sendBtn").disabled = true;
 let timer = 0;
 let timerInterval = null; 
@@ -62,11 +64,13 @@ startBtn.onclick=()=>{
     question.innerHTML=""
     endBtn.style="display:block"
     const role = document.getElementById("role").value;
+    mode= document.getElementById("mode").value;
     const difficulty = document.getElementById("difficulty").value;
     console.log(role,difficulty)
     socket.emit("startInterview", {
        role: role,
-       difficulty: difficulty
+       difficulty: difficulty,
+       mode: mode
     });
     startTimer();
 };
