@@ -53,6 +53,7 @@ io.on("connection", (socket) => {
                     - Ask ONE question only not more than 2 sentence.
                     - Do not repeat previous questions.
                     - Do not give answer
+                    - - If no interview history is provided, respond ONLY with: "No interview answers available for evaluation."
                     `
                 },
                 {
