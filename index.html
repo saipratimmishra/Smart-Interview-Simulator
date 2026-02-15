@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Smart Interview Simulator</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header class="topbar">
+            <h2>🧠 Smart Interview Simulator</h2>
+
+        <div class="status">
+
+            <select class="badge" id="role">
+                <option value="frontend">Frontend (HTML CSS JS)</option>
+                <option value="backend">Backend</option>
+                <option value="java">Java</option>
+                <option value="python">Python</option>
+                <option value="human anatomy">Anatomy</option>
+            </select>
+
+            <select class="badge" id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            <span class="badge timer" id="timer">00:00</span>
+
+        </div>
+
+    </header>
+
+    <main id="feedback-main" style="display: none;" class="feedback-main">
+
+    </main>
+    <main id="main" class="main">
+
+        <section class="panel interviewer">
+
+            <h3>AI Interviewer</h3>
+
+            <div id="questionBox" class="glass">
+                Press Press Start Interview
+            </div>
+
+            <div id="aiThinking" class="thinking">
+                AI is thinking...
+            </div>
+            <div style="display: none;" id="question" class="question glass">
+                
+            </div>
+
+        </section>
+
+        <section class="panel candidate">
+
+            <h3>Your Answers</h3>
+
+            <div id="chatArea" class="chat"></div>
+
+            <div class="inputBox">
+                <textarea id="answerInput" placeholder="Type or speak your answer..."></textarea>
+
+                <button style="display: none;" id="voiceBtn">🎤</button>
+                <button id="sendBtn">Send</button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <button id="startBtn" class="start">Start Interview</button>
+    <button style="display: none;" id="endBtn" class="start">End Interview</button>
+    <button style="display: none;" id="rstBtn" class="start">Restart Interview</button>
+
+</div>
+<script src="/socket.io/socket.io.js"></script> 
+<script src="app.js"></script>
+
+</body>
+</html>
