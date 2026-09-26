@@ -95,24 +95,31 @@ io.on("connection", (socket) => {
     }
 
     console.log("User connected ");
-    socket.on("startInterview",async (subject,difficulty,mode)=>{
-        questions=[]
-        sub=subject
-        diff=difficulty
-        mod=mode
-        await generateQuestion(socket, subject, difficulty, mode);
-    })
+    socket.on("startInterview", async (subject) => {
+    questions = [];
+    sub = subject.role;
+    diff = subject.difficulty;
+    mod = subject.mode;
 
-    socket.on("Answer",async (answer)=>{
-        quesanswer=answer
-        questions.push({question:question, answer:quesanswer})
-        await generateQuestion(socket, {
+    await generateQuestion(socket, subject);
+   });
+
+    socket.on("Answer", async (answer) => {
+    quesanswer = answer;
+
+    questions.push({
+        question: question,
+        answer: quesanswer
+    });
+
+    await generateQuestion(socket, {
         role: sub,
         difficulty: diff,
         mode: mod
-       });
-        console.log(questions)
     });
+
+    console.log(questions);
+      });
     
     socket.on("feedback",async ()=>{
         
