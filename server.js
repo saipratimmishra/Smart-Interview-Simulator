@@ -17,10 +17,11 @@ const client = new Groq({
 app.use(express.static("public"));
 
 io.on("connection", (socket) => {
+   
     async function generateQuestion(socket, subject){
         console.log(subject)
-        difficulty=subject.difficulty
-        mode=subject.mode
+        let difficulty=subject.difficulty
+        let mode=subject.mode
         subject=subject.role
         
         console.log(subject,difficulty,mode)
@@ -41,7 +42,7 @@ io.on("connection", (socket) => {
                     - server-side development (Node.js, APIs, databases, authentication, system design).
 
                     - If subject is "java":
-                    - Java programming language, OOP, collections, multithreading, JVM concepts.
+                    - Java programming language, mostly OOPs, collections, multithreading, JVM concepts.
 
                     - If subject is "python":
                     - Python programming, data structures, functions, async, libraries.
@@ -83,7 +84,11 @@ io.on("connection", (socket) => {
     socket.on("Answer",async (answer)=>{
         quesanswer=answer
         questions.push({question:question, answer:quesanswer})
-        await generateQuestion(socket, sub, diff);
+        await generateQuestion(socket, {
+        role: sub,
+        difficulty: diff,
+        mode: mod
+       });
         console.log(questions)
     });
     
