@@ -58,8 +58,30 @@ io.on("connection", (socket) => {
                 },
                 {
                     role: "user",
-                    content: `Ask a ${difficulty} ${subject} interview question of type ${mode}.
-                            Avoid questions from this as well as related to this: ${JSON.stringify(questions)}`
+                    content: `
+                           Generate exactly ONE ${difficulty} ${subject} interview question.
+                           
+                           Interview mode: ${mode}
+                           
+                           If the mode is "mcq":
+                           - The question MUST be multiple choice.
+                           - Give exactly 4 options labeled A), B), C), and D).
+                           - Do NOT ask an open-ended or descriptive question.
+                           - Do NOT provide the answer.
+                           
+                           If the mode is "short question":
+                           - Ask exactly ONE short-answer interview question.
+                           - Do NOT provide options.
+                           - Do NOT provide the answer.
+                           
+                           Stay strictly within the ${subject} subject.
+                           Do not change the subject or interview mode.
+                           
+                           Do not repeat or create a question closely related to these previous questions:
+                           ${JSON.stringify(questions)}
+                           
+                           Return ONLY the question and its options if the mode is MCQ.
+                           `
                 }
             ]
         });
