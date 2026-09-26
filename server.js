@@ -20,8 +20,8 @@ io.on("connection", (socket) => {
    
     async function generateQuestion(socket, subject){
         console.log(subject)
-        let difficulty=subject.difficulty
-        let mode=subject.mode
+        difficulty=subject.difficulty
+        mode=subject.mode
         subject=subject.role
         
         console.log(subject,difficulty,mode)
