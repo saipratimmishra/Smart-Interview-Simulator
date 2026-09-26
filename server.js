@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
         console.log(subject,difficulty,mode)
         try{
         const chatCompletion = await client.chat.completions.create({
-            model: "llama-3.3-70b-versatile",
+            model: "openai/gpt-oss-120b",
             messages: [
                 {
                     role: "system",
@@ -90,7 +90,7 @@ io.on("connection", (socket) => {
     socket.on("feedback",async ()=>{
         
         const chatCompletion = await client.chat.completions.create({
-            model: "llama-3.3-70b-versatile",
+            model: "openai/gpt-oss-120b",
             messages: [
                 {
                     role: "system",
